@@ -1,7 +1,12 @@
 # development stage
 FROM node:14-alpine AS dev-stage
 
-RUN apk add --no-cache make gcc g++ python
+RUN apk add --no-cache --virtual .gyp \
+        python \
+        make \
+        g++ \
+    && npm install \
+    && apk del .gyp
 
 WORKDIR /srv
 
